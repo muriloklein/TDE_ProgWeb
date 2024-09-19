@@ -11,7 +11,8 @@ export class CientistaController {
 
   getAll = async (req: Request, res: Response): Promise<void> => {
     const cientistas = await this.CientistaRepository.getAll();
-    res.status(200).json(cientistas);
+    if(!cientistas.length) res.status(204).json({message: "Nenhum cientista cadastrado"}) // fazer testes para retornar caso não haja nenhum cientista cadastrado
+    else res.status(200).json(cientistas);
   };
 
   getById = async (req: Request, res: Response): Promise<void> => {
@@ -27,7 +28,9 @@ export class CientistaController {
 
   create = async (req: Request, res: Response): Promise<void> => {
     const newCientista = await this.CientistaRepository.create(req.body);
-    res.status(201).json({ message: "Cientista added" });
+    if (newCientista) res.status(201).json({ message: "Cientista added" });
+    // else res.status(400).json({message: "Parametros incorretos"}); // fazer testes e implementar feature
+    // else res.status(409).json({message: "Cientista ja cadastrado"}); // fazer testes e implementar feature
   };
 
   update = async (req: Request, res: Response): Promise<void> => {
@@ -40,6 +43,8 @@ export class CientistaController {
     } else {
       res.status(200).json(updatedCientista);
     }
+    // else res.status(400).json({message: "Parametros incorretos"}); // fazer testes e implementar feature
+    // else res.status(409).json({message: "Cientista com esses parametros ja cadastrado"}); // fazer testes e implementar feature
   };
 
   delete = async (req: Request, res: Response): Promise<void> => {
@@ -49,7 +54,7 @@ export class CientistaController {
     if (!success) {
       res.status(404).send("Cientista not found");
     } else {
-      res.status(204).send();
+      res.status(200).json({message: "Cientista excluido com sucesso"});
     }
   };
 }

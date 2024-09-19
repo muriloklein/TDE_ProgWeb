@@ -11,7 +11,8 @@ export class CidadeController {
 
   getAll = async (req: Request, res: Response): Promise<void> => {
     const cidades = await this.CidadeRepository.getAll();
-    res.status(200).json(cidades);
+    if(!cidades.length) res.status(204).json({message: "Nenhuma cidade cadastrada"}) // fazer testes para retornar caso não haja nenhuma cidade cadastrado
+    else res.status(200).json(cidades);
   };
 
   getById = async (req: Request, res: Response): Promise<void> => {
@@ -27,7 +28,9 @@ export class CidadeController {
 
   create = async (req: Request, res: Response): Promise<void> => {
     const newCidade = await this.CidadeRepository.create(req.body);
-    res.status(201).json({ message: "Cidade added" });
+    if (newCidade) res.status(201).json({ message: "Cidade added" });
+    // else res.status(400).json({message: "Parametros incorretos"}); // fazer testes e implementar feature
+    // else res.status(409).json({message: "Cidade ja cadastrada"}); // fazer testes e implementar feature
   };
 
   update = async (req: Request, res: Response): Promise<void> => {
@@ -40,6 +43,8 @@ export class CidadeController {
     } else {
       res.status(200).json(updatedCidade);
     }
+    // else res.status(400).json({message: "Parametros incorretos"}); // fazer testes e implementar feature
+    // else res.status(409).json({message: "Cidade com esses parametros ja cadastrada"}); // fazer testes e implementar feature
   };
 
   delete = async (req: Request, res: Response): Promise<void> => {
@@ -49,7 +54,7 @@ export class CidadeController {
     if (!success) {
       res.status(404).send("Cidade not found");
     } else {
-      res.status(204).send();
+      res.status(200).json({message: "Cidade excluida com sucesso"});
     }
   };
 }

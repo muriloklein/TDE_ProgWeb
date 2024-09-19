@@ -11,7 +11,8 @@ export class FilosofoController {
 
   getAll = async (req: Request, res: Response): Promise<void> => {
     const filosofos = await this.FilosofoRepository.getAll();
-    res.status(200).json(filosofos);
+    if(!filosofos.length) res.status(204).json({message: "Nenhum filosofo cadastrado"}) // fazer testes para retornar caso não haja nenhum filosofo cadastrado
+    else res.status(200).json(filosofos);
   };
 
   getById = async (req: Request, res: Response): Promise<void> => {
@@ -27,7 +28,9 @@ export class FilosofoController {
 
   create = async (req: Request, res: Response): Promise<void> => {
     const newFilosofo = await this.FilosofoRepository.create(req.body);
-    res.status(201).json({ message: "Filosofo added" });
+    if (newFilosofo) res.status(201).json({ message: "Filosofo added" });
+    // else res.status(400).json({message: "Parametros incorretos"}); // fazer testes e implementar feature
+    // else res.status(409).json({message: "Filosofo ja cadastrado"}); // fazer testes e implementar feature
   };
 
   update = async (req: Request, res: Response): Promise<void> => {
@@ -40,6 +43,8 @@ export class FilosofoController {
     } else {
       res.status(200).json(updatedFilosofo);
     }
+    // else res.status(400).json({message: "Parametros incorretos"}); // fazer testes e implementar feature
+    // else res.status(409).json({message: "Filosofo com esses parametros ja cadastrado"}); // fazer testes e implementar feature
   };
 
   delete = async (req: Request, res: Response): Promise<void> => {
@@ -49,7 +54,7 @@ export class FilosofoController {
     if (!success) {
       res.status(404).send("Filosofo not found");
     } else {
-      res.status(204).send();
+      res.status(200).json({message: "Filosofo excluido com sucesso"});
     }
   };
 }
