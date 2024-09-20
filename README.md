@@ -13,3 +13,5 @@
 2. Setup database settings inside `data-source.ts` file
 3. Create the data base `tde`
 4. Run `npm run build` or `npm run dev` command
+
+Reposotorio no GIT: https://github.com/muriloklein/TDE_ProgWeb
