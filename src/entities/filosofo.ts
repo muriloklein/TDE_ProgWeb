@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 import Cidade from "./cidade";
 
 @Entity()
@@ -15,10 +15,16 @@ export class Filosofo {
   @Column()
   deathDay?: Date;
 
-  @ManyToOne(() => Cidade, (cidade: { id: number; }) => cidade.id)
+  @ManyToOne(() => Cidade, (cidade: { id: number }) => cidade.id)
   birhCity?: Cidade;
 
-  constructor(id?: number, name?: string, birthDay?: Date, deathDay?: Date, birthCity?: Cidade) {
+  constructor(
+    id?: number,
+    name?: string,
+    birthDay?: Date,
+    deathDay?: Date,
+    birthCity?: Cidade
+  ) {
     this.id = id;
     this.name = name;
     this.birthDay = birthDay;
