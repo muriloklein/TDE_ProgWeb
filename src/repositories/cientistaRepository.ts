@@ -40,7 +40,12 @@ class CientistaRepository implements CientistaRepository {
     if (!cientistaToUpdate) {
       return undefined;
     }
-    return this.repository.merge(cientistaToUpdate, cientista);
+
+    const updatedCientista = this.repository.merge(
+      cientistaToUpdate,
+      cientista
+    );
+    return this.repository.save(updatedCientista);
   }
 
   async delete(id: number): Promise<boolean> {

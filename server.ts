@@ -1,9 +1,10 @@
 import app from "./src/app";
 import { appDataSource } from "./src/data-source";
 
-const PORT = parseInt(process.env.API_PORT || '3001');
+const PORT = parseInt(process.env.API_PORT || "3001");
 
-appDataSource.initialize()
+appDataSource
+  .initialize()
   .then(() => {
     console.log("Data Source has been initialized!");
     app.listen(PORT, () => {
