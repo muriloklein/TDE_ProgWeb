@@ -38,7 +38,9 @@ class CidadeRepository implements CidadeRepository {
     if (!cidadeToUpdate) {
       return undefined;
     }
-    return this.repository.merge(cidadeToUpdate, cidade);
+
+    const updatedCidade = this.repository.merge(cidadeToUpdate, cidade);
+    return this.repository.save(updatedCidade);
   }
 
   async delete(id: number): Promise<boolean> {
