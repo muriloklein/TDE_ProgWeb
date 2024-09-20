@@ -37,7 +37,7 @@ export class CientistaController {
       req.body
     );
     if (!updatedCientista) {
-      res.status(404).send("Cientista not found");
+      res.status(404).json({ message: "Cientista not found" });
     } else {
       res.status(200).json(updatedCientista);
     }
@@ -48,7 +48,7 @@ export class CientistaController {
       parseInt(req.params.id)
     );
     if (!success) {
-      res.status(404).send("Cientista not found");
+      res.status(404).json({ message: "Cientista not found" });
     } else {
       res.status(200).json({ message: "Cientista excluido com sucesso" });
     }

@@ -38,7 +38,8 @@ class FilosofoRepository implements FilosofoRepository {
     if (!filosofoToUpdate) {
       return undefined;
     }
-    return this.repository.merge(filosofoToUpdate, filosofo);
+    const updatedFilosofo = this.repository.merge(filosofoToUpdate, filosofo);
+    return this.repository.save(updatedFilosofo);
   }
 
   async delete(id: number): Promise<boolean> {

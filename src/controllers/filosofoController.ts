@@ -11,7 +11,7 @@ export class FilosofoController {
 
   getAll = async (req: Request, res: Response): Promise<void> => {
     const filosofos = await this.FilosofoRepository.getAll();
-    if(!filosofos.length) res.status(204).json({message: "Nenhum filosofo cadastrado"}) // fazer testes para retornar caso não haja nenhum filosofo cadastrado
+    if (!filosofos.length) res.status(204);
     else res.status(200).json(filosofos);
   };
 
@@ -20,7 +20,7 @@ export class FilosofoController {
       parseInt(req.params.id)
     );
     if (!filosofo) {
-      res.status(404).send("filosofo not found");
+      res.status(404).json({ message: "filosofo not found" });
     } else {
       res.status(200).json(filosofo);
     }
@@ -29,8 +29,6 @@ export class FilosofoController {
   create = async (req: Request, res: Response): Promise<void> => {
     const newFilosofo = await this.FilosofoRepository.create(req.body);
     if (newFilosofo) res.status(201).json({ message: "Filosofo added" });
-    // else res.status(400).json({message: "Parametros incorretos"}); // fazer testes e implementar feature
-    // else res.status(409).json({message: "Filosofo ja cadastrado"}); // fazer testes e implementar feature
   };
 
   update = async (req: Request, res: Response): Promise<void> => {
@@ -39,12 +37,10 @@ export class FilosofoController {
       req.body
     );
     if (!updatedFilosofo) {
-      res.status(404).send("Filosofo not found");
+      res.status(404).json({ message: "Filosofo not found" });
     } else {
       res.status(200).json(updatedFilosofo);
     }
-    // else res.status(400).json({message: "Parametros incorretos"}); // fazer testes e implementar feature
-    // else res.status(409).json({message: "Filosofo com esses parametros ja cadastrado"}); // fazer testes e implementar feature
   };
 
   delete = async (req: Request, res: Response): Promise<void> => {
@@ -52,9 +48,9 @@ export class FilosofoController {
       parseInt(req.params.id)
     );
     if (!success) {
-      res.status(404).send("Filosofo not found");
+      res.status(404).json({ message: "Filosofo not found" });
     } else {
-      res.status(200).json({message: "Filosofo excluido com sucesso"});
+      res.status(200).json({ message: "Filosofo excluido com sucesso" });
     }
   };
 }

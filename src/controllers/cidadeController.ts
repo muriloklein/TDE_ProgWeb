@@ -35,7 +35,7 @@ export class CidadeController {
       req.body
     );
     if (!updatedCidade) {
-      res.status(404).send("Cidade not found");
+      res.status(404).json({ message: "Cidade not found" });
     } else {
       res.status(200).json(updatedCidade);
     }
