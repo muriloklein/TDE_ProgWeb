@@ -14,4 +14,4 @@
 3. Create the data base `tde`
 4. Run `npm run build` or `npm run dev` command
 
-Reposotorio no GIT: https://github.com/muriloklein/TDE_ProgWeb
+Repositório no GIT: https://github.com/muriloklein/TDE_ProgWeb
