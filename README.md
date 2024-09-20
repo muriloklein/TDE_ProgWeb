@@ -11,4 +11,5 @@
 
 1. Run `npm i` command
 2. Setup database settings inside `data-source.ts` file
-3. Run `npm start` command
+3. Create the data base `tde`
+4. Run `npm run build` or `npm run dev` command
